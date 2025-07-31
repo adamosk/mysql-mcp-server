@@ -1,0 +1,68 @@
+{
+  "name": "mysql-mcp-server",
+  "version": "1.0.0",
+  "description": "Sophisticated MCP (Model Context Protocol) server for secure multi-database MySQL access with configurable security, lazy loading, and hot reload capabilities",
+  "main": "mcp-mysql-lite.js",
+  "type": "module",
+  "bin": {
+    "mysql-mcp-server": "./mcp-mysql-lite.js"
+  },
+  "scripts": {
+    "start": "node mcp-mysql-lite.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "npm run check-env",
+    "check-env": "node -e \"if (!require('fs').existsSync('.env')) { console.error('⚠️  Please copy .env.example to .env and configure your databases'); process.exit(1); }\"",
+    "postinstall": "echo '📋 Next steps: 1) Copy .env.example to .env, 2) Configure your databases, 3) Add to VS Code MCP settings'",
+    "build": "pkg . --out-path dist/",
+    "build:win": "pkg . --targets node18-win-x64 --out-path dist/",
+    "build:mac": "pkg . --targets node18-macos-x64 --out-path dist/",
+    "build:linux": "pkg . --targets node18-linux-x64 --out-path dist/",
+    "build:all": "npm run build:win && npm run build:mac && npm run build:linux"
+  },
+  "keywords": [
+    "mcp",
+    "mysql",
+    "database",
+    "model-context-protocol",
+    "multi-database",
+    "security",
+    "lazy-loading",
+    "hot-reload",
+    "vs-code"
+  ],
+  "author": "MySQL MCP Server Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamosk/mysql-mcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adamosk/mysql-mcp-server/issues"
+  },
+  "homepage": "https://github.com/adamosk/mysql-mcp-server#readme",
+  "files": [
+    "mcp-mysql-lite.js",
+    "README.md",
+    "LICENSE",
+    ".env.example"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.0",
+    "dotenv": "^17.2.1",
+    "mysql2": "^3.14.3"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
+  },
+  "pkg": {
+    "assets": [
+      ".env.example"
+    ],
+    "targets": [
+      "node18-win-x64",
+      "node18-macos-x64", 
+      "node18-linux-x64"
+    ],
+    "outputPath": "dist"
+  }
+}
